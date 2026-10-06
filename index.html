@@ -1,0 +1,30 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Resell Tracker Pro</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="app">
+<aside><div class="logo"><i></i>Resell<span>Tracker</span></div><label>SESSION ACTIVE</label><select id="sessions"></select><button id="newSession" class="sidebtn">＋ Nouvelle session</button>
+<nav><button class="nav active" data-view="dashboard">⌂ Vue d'ensemble</button><button class="nav" data-view="inventory">▣ Inventaire</button><button class="nav" data-view="sales">↗ Ventes</button></nav>
+<div class="sideBottom"><button id="export" class="sidebtn">↓ Exporter les ventes</button><button id="reset" class="sidebtn red">Réinitialiser</button></div></aside>
+<main><header><div><div class="eyebrow">ACHAT · REVENTE</div><h1 id="pageTitle">Vue d'ensemble</h1></div><button class="primary" id="add">＋ Ajouter un article</button></header>
+
+<section id="dashboard" class="view active">
+<div class="stats">
+<div class="stat"><span>Capital investi</span><b id="invested">0 €</b><small>sur tous les achats</small></div>
+<div class="stat"><span>Chiffre d'affaires</span><b id="revenue">0 €</b><small>ventes réalisées</small></div>
+<div class="stat"><span>Bénéfice total</span><b class="green" id="profit">0 €</b><small>depuis le début</small></div>
+<div class="stat"><span>Taux de marge</span><b id="margin">0 %</b><small>sur les ventes</small></div>
+</div>
+<div class="miniStats"><div><span>Articles</span><b id="totalItems">0</b></div><div><span>En stock</span><b id="stock">0</b></div><div><span>Vendus</span><b id="sold">0</b></div><div><span>Panier moyen</span><b id="avg">0 €</b></div></div>
+<div class="grid2"><div class="card"><div class="cardTitle"><div><h2>Évolution du bénéfice</h2><p>Bénéfices cumulés de tes ventes.</p></div></div><canvas id="chart" height="210"></canvas><div id="chartEmpty" class="empty">Enregistre tes premières ventes pour voir le graphique.</div></div>
+<div class="card"><div class="cardTitle"><div><h2>Dernières ventes</h2><p>Les 5 plus récentes.</p></div><button class="link" data-go="sales">Voir tout →</button></div><div id="recent" class="recent"></div></div></div>
+</section>
+
+<section id="inventory" class="view"><div class="bar"><div><h2>Inventaire</h2><p>Gère tes achats et transforme-les en ventes.</p></div><button class="primary" id="add2">＋ Ajouter</button></div>
+<div class="filters"><input id="search" placeholder="⌕ Rechercher un article..."><select id="status"><option value="all">Tous les statuts</option><option value="stock">En stock</option><option value="sold">Vendus</option></select><select id="sort"><option value="new">Plus récent</option><option value="buyAsc">Achat croissant</option><option value="buyDesc">Achat décroissant</option><option value="profitDesc">Bénéfice décroissant</option></select></div>
+<div class="card table"><table><thead><tr><th>Article</th><th>Achat</th><th>Vente</th><th>Bénéfice</th><th>Marge %</th><th>Statut</th><th></th></tr></thead><tbody id="inventoryTable"></tbody></table><div id="inventoryEmpty" class="empty">Aucun article ne correspond.</div></div></section>
+
+<section id="sales" class="view"><div class="bar"><div><h2>Ventes réalisées</h2><p>Historique et performances.</p></div><button class="primary" id="export2">↓ Exporter CSV</button></div>
+<div class="card table"><table><thead><tr><th>Article</th><th>Achat</th><th>Vente</th><th>Bénéfice</th><th>Marge</th><th>Date</th></tr></thead><tbody id="salesTable"></tbody></table><div id="salesEmpty" class="empty">Aucune vente réalisée.</div></div></section>
+</main></div>
+
+<div class="modal" id="itemModal"><div class="modalBox"><button class="close" id="close">×</button><div class="eyebrow">NOUVEL ACHAT</div><h2>Ajouter un article</h2><p>Le prix de vente pourra être ajouté quand tu le vendras.</p><form id="itemForm"><label>Nom de l'article<input id="itemName" required maxlength="100" placeholder="Ex. The North Face Nuptse"></label><label>Prix d'achat (€)<input id="buyPrice" type="number" min="0" step=".01" required placeholder="30"></label><button class="primary full">Ajouter à mon inventaire</button></form></div></div>
+<div class="modal" id="sellModal"><div class="modalBox"><button class="close" id="closeSell">×</button><div class="eyebrow">ARTICLE VENDU</div><h2 id="sellTitle"></h2><p>Entre le prix auquel tu as réellement vendu l'article.</p><form id="sellForm"><input type="hidden" id="sellId"><label>Prix de vente (€)<input id="sellPrice" type="number" min="0" step=".01" required placeholder="65"></label><button class="primary full">Enregistrer la vente</button></form></div></div>
+<script src="app.js"></script></body></html>
